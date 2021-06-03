@@ -11,7 +11,7 @@ interface Product {
   title: string;
   price: number;
   image: string;
-  
+
 }
 
 interface ProductFormatted extends Product {
@@ -23,7 +23,7 @@ interface CartItemsAmount {
 }
 
 const Home = (): JSX.Element => {
-  // const [products, setProducts] = useState<ProductFormatted[]>([]);
+  const [products, setProducts] = useState<ProductFormatted[]>([]);
   const { addProduct, cart } = useCart();
 
   const cartItemsAmount = cart.reduce((sumAmount, product) => {
@@ -39,10 +39,10 @@ const Home = (): JSX.Element => {
 
       const data = response.data.map((product) => ({
         ...product,
-        priceFormated: formatPrice(product.price)
+        priceFormatted: formatPrice(product.price)
       }))
+      setProducts(data)
     }
-
     loadProducts();
   }, []);
 

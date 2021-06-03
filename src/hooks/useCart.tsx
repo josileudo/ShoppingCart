@@ -23,10 +23,8 @@ const CartContext = createContext<CartContextData>({} as CartContextData);
 
 export function CartProvider({ children }: CartProviderProps): JSX.Element {
   const [cart, setCart] = useState<Product[]>(() => {
-    const receive = localStorage.getItem("@RocketShoes: cart")
-    const storagedCart = JSON.stringify(receive)
+    const storagedCart = localStorage.getItem("@RocketShoes: cart")
 
-    console.log (storagedCart)
     if (storagedCart) {
       return JSON.parse(storagedCart);
     }
@@ -36,12 +34,12 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
   const addProduct = async (productId: number) => {
     try {
       const updatedCart = [...cart]
-      const productExisted = updatedCart.find(product => product.id === productId);
+      const productExists = updatedCart.find(product => product.id === productId);
       
       const stock = await api.get(`/stock/${productId}`)
 
       const stockAmount = stock.data.amount
-      const currentAmount = productExisted ? productExisted.amount : 0
+      const currentAmount = productExists ? productExists.amount : 0
       const amount = currentAmount + 1
 
       if (amount > stockAmount) {
@@ -49,13 +47,14 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
         return 
       }
 
-      if (productExisted){
-       productExisted.amount = amount 
+      if (productExists){
+       productExists.amount = amount 
       } else {
         const product = await api.get(`/products/${productId}`)
+       
         const newProduct = {
           ...product.data, 
-            amount: 1  
+          amount: 1  
         }
         updatedCart.push(newProduct)
       }
@@ -63,7 +62,7 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
       localStorage.setItem('@RocketShoes:cart', JSON.stringify(updatedCart))
 
     } catch {
-      toast.error('Erro na adição de produto');
+      toast.error('Erro na adição do produto');
     }
   };
 

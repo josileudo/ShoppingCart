@@ -11,7 +11,6 @@ interface Product {
   title: string;
   price: number;
   image: string;
-
 }
 
 interface ProductFormatted extends Product {
@@ -52,20 +51,20 @@ const Home = (): JSX.Element => {
 
   return (
     <ProductList>
-      {cart.map(product => {
+      {products.map(product => {
         return (
-          <li>
+          <li key = {product.id}>
             <img src={product.image} alt={product.title} />
             <strong>{product.title}</strong>
-            <span>R$ {product.amount}</span>
+            <span>{product.priceFormatted}</span>
             <button
               type="button"
               data-testid="add-product-button"
-              // onClick={() => handleAddProduct(product.id)}
+              onClick={() => handleAddProduct(product.id)}
             >
             <div data-testid="cart-product-quantity">
             <MdAddShoppingCart size={16} color="#FFF" />
-            {/* {cartItemsAmount[product.id] || 0} */} 2
+              {cartItemsAmount[product.id] || 0 } 
             </div>
             <span>ADICIONAR AO CARRINHO</span>
           </button>

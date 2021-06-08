@@ -91,7 +91,7 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
         updatedCart.splice(productIndex, 1)
         setCart(updatedCart)  
       } else {
-       //throw error
+       throw error
       }
     } catch {
       toast.error('Erro na remoção do produto')
@@ -121,7 +121,7 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
         productExists.amount = amount   
         setCart(updatedCart)
       } else {
-        //throw error
+        throw error
       }
     } 
     catch {

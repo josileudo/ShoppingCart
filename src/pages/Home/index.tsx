@@ -67,8 +67,8 @@ const Home = (): JSX.Element => {
               {cartItemsAmount[product.id] || 0 } 
             </div>
             <span>ADICIONAR AO CARRINHO</span>
-          </button>
-      </li>
+            </button>
+          </li>
         )
       })}
       

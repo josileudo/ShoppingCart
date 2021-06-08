@@ -78,7 +78,7 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
         setCart(updatedCart)  
         localStorage.setItem('@RocketShoes:cart', JSON.stringify(updatedCart))
       } else {
-        throw error()
+       //throw error
       }
     } catch {
       toast.error('Erro na remoção do produto')
@@ -109,7 +109,7 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
         setCart(updatedCart)
         localStorage.setItem('@RocketShoes:cart', JSON.stringify(updatedCart))
       } else {
-       throw error()
+       //throw error
       }
     } 
     catch {
